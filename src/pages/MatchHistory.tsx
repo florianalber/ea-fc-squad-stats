@@ -18,10 +18,10 @@ export default function MatchHistory() {
   return (
     <div className="container pb-24 pt-6 space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Match-History</h1>
+        <h1 className="text-xl font-extrabold uppercase tracking-wider">Match-History</h1>
         <button
           onClick={() => navigate("/new")}
-          className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground"
+          className="flex items-center gap-1.5 rounded-lg ea-gold-gradient px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground ea-glow-gold transition-all hover:scale-105"
         >
           <PlusCircle className="h-4 w-4" />
           Neu
@@ -29,7 +29,7 @@ export default function MatchHistory() {
       </div>
 
       {matches.length === 0 ? (
-        <p className="py-12 text-center text-muted-foreground">Noch keine Matches erfasst.</p>
+        <p className="py-12 text-center text-muted-foreground font-medium">Noch keine Matches erfasst.</p>
       ) : (
         <div className="space-y-2">
           {matches.map((match) => (

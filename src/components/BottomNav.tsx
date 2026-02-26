@@ -9,7 +9,7 @@ const links = [
 
 export default function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-card">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/50 bg-card/95 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-around">
         {links.map(({ to, label, icon: Icon }) => (
           <RouterNavLink
@@ -17,7 +17,7 @@ export default function BottomNav() {
             to={to}
             end={to === "/"}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 text-xs font-medium transition-colors ${
+              `flex flex-col items-center gap-0.5 text-[10px] font-bold uppercase tracking-wider transition-colors ${
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               }`
             }

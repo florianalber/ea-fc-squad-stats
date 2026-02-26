@@ -61,72 +61,72 @@ export default function QuickEntryForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-muted-foreground">Heimteam (Verein)</label>
+          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Heimteam (Verein)</label>
           <input
             value={homeTeam}
             onChange={(e) => setHomeTeam(e.target.value)}
             placeholder="z.B. Real Madrid"
-            className="w-full rounded-lg border bg-card px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors placeholder:text-muted-foreground/40"
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-muted-foreground">Auswärtsteam (Verein)</label>
+          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Auswärtsteam (Verein)</label>
           <input
             value={awayTeam}
             onChange={(e) => setAwayTeam(e.target.value)}
             placeholder="z.B. FC Bayern"
-            className="w-full rounded-lg border bg-card px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors placeholder:text-muted-foreground/40"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-muted-foreground">Tore Heim</label>
+          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Tore Heim</label>
           <input
             type="number"
             min="0"
             value={homeScore}
             onChange={(e) => setHomeScore(e.target.value)}
             placeholder="0"
-            className="w-full rounded-lg border bg-card px-3 py-2.5 text-sm font-mono outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-mono font-bold outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-muted-foreground">Tore Auswärts</label>
+          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Tore Auswärts</label>
           <input
             type="number"
             min="0"
             value={awayScore}
             onChange={(e) => setAwayScore(e.target.value)}
             placeholder="0"
-            className="w-full rounded-lg border bg-card px-3 py-2.5 text-sm font-mono outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-mono font-bold outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
           />
         </div>
       </div>
 
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-muted-foreground">Datum</label>
+        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Datum</label>
         <input
           type="date"
           value={matchDate}
           onChange={(e) => setMatchDate(e.target.value)}
-          className="w-full rounded-lg border bg-card px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+          className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-muted-foreground">Spielmodus</label>
+        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Spielmodus</label>
         <div className="flex gap-2">
           {(Object.entries(MATCH_MODE_LABELS) as [MatchMode, string][]).map(([key, label]) => (
             <button
               key={key}
               type="button"
               onClick={() => setMatchMode(key)}
-              className={`flex-1 rounded-lg border py-2 text-sm font-medium transition-colors ${
+              className={`flex-1 rounded-lg border py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
                 matchMode === key
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-secondary/50"
+                  ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(45_100%_51%/0.1)]"
+                  : "border-border/50 text-muted-foreground hover:border-border hover:text-foreground"
               }`}
             >
               {label}
@@ -136,13 +136,13 @@ export default function QuickEntryForm() {
       </div>
 
       {homeScore !== "" && awayScore !== "" && homeScore === awayScore && (
-        <p className="text-xs text-destructive">Unentschieden nicht erlaubt – bitte Ergebnis nach Verlängerung/Elfmeterschießen eintragen.</p>
+        <p className="text-xs text-destructive font-medium">Unentschieden nicht erlaubt – bitte Ergebnis nach Verlängerung/Elfmeterschießen eintragen.</p>
       )}
 
       <button
         type="submit"
         disabled={!canSubmit || insertMatch.isPending}
-        className="w-full rounded-lg bg-primary py-3 font-semibold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2"
+        className="w-full rounded-lg ea-gold-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-gold transition-all hover:scale-[1.01]"
       >
         {insertMatch.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
         Spiel speichern
