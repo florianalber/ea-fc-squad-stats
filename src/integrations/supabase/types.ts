@@ -14,7 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      matches: {
+        Row: {
+          away_ball_recovery_time: number | null
+          away_corners: number | null
+          away_dribble_success: number | null
+          away_fouls: number | null
+          away_free_kicks: number | null
+          away_interceptions: number | null
+          away_offsides: number | null
+          away_pass_accuracy: number | null
+          away_passes: number | null
+          away_penalties: number | null
+          away_possession: number | null
+          away_saves: number | null
+          away_score: number
+          away_shot_accuracy: number | null
+          away_shots: number | null
+          away_tackles: number | null
+          away_tackles_won: number | null
+          away_team_name: string
+          away_xg: number | null
+          away_yellow_cards: number | null
+          created_at: string
+          entry_mode: string
+          home_ball_recovery_time: number | null
+          home_corners: number | null
+          home_dribble_success: number | null
+          home_fouls: number | null
+          home_free_kicks: number | null
+          home_interceptions: number | null
+          home_offsides: number | null
+          home_pass_accuracy: number | null
+          home_passes: number | null
+          home_penalties: number | null
+          home_possession: number | null
+          home_saves: number | null
+          home_score: number
+          home_shot_accuracy: number | null
+          home_shots: number | null
+          home_tackles: number | null
+          home_tackles_won: number | null
+          home_team_name: string
+          home_xg: number | null
+          home_yellow_cards: number | null
+          id: string
+          match_date: string
+          match_mode: string
+          photo_url: string | null
+        }
+        Insert: {
+          away_ball_recovery_time?: number | null
+          away_corners?: number | null
+          away_dribble_success?: number | null
+          away_fouls?: number | null
+          away_free_kicks?: number | null
+          away_interceptions?: number | null
+          away_offsides?: number | null
+          away_pass_accuracy?: number | null
+          away_passes?: number | null
+          away_penalties?: number | null
+          away_possession?: number | null
+          away_saves?: number | null
+          away_score: number
+          away_shot_accuracy?: number | null
+          away_shots?: number | null
+          away_tackles?: number | null
+          away_tackles_won?: number | null
+          away_team_name: string
+          away_xg?: number | null
+          away_yellow_cards?: number | null
+          created_at?: string
+          entry_mode?: string
+          home_ball_recovery_time?: number | null
+          home_corners?: number | null
+          home_dribble_success?: number | null
+          home_fouls?: number | null
+          home_free_kicks?: number | null
+          home_interceptions?: number | null
+          home_offsides?: number | null
+          home_pass_accuracy?: number | null
+          home_passes?: number | null
+          home_penalties?: number | null
+          home_possession?: number | null
+          home_saves?: number | null
+          home_score: number
+          home_shot_accuracy?: number | null
+          home_shots?: number | null
+          home_tackles?: number | null
+          home_tackles_won?: number | null
+          home_team_name: string
+          home_xg?: number | null
+          home_yellow_cards?: number | null
+          id?: string
+          match_date?: string
+          match_mode?: string
+          photo_url?: string | null
+        }
+        Update: {
+          away_ball_recovery_time?: number | null
+          away_corners?: number | null
+          away_dribble_success?: number | null
+          away_fouls?: number | null
+          away_free_kicks?: number | null
+          away_interceptions?: number | null
+          away_offsides?: number | null
+          away_pass_accuracy?: number | null
+          away_passes?: number | null
+          away_penalties?: number | null
+          away_possession?: number | null
+          away_saves?: number | null
+          away_score?: number
+          away_shot_accuracy?: number | null
+          away_shots?: number | null
+          away_tackles?: number | null
+          away_tackles_won?: number | null
+          away_team_name?: string
+          away_xg?: number | null
+          away_yellow_cards?: number | null
+          created_at?: string
+          entry_mode?: string
+          home_ball_recovery_time?: number | null
+          home_corners?: number | null
+          home_dribble_success?: number | null
+          home_fouls?: number | null
+          home_free_kicks?: number | null
+          home_interceptions?: number | null
+          home_offsides?: number | null
+          home_pass_accuracy?: number | null
+          home_passes?: number | null
+          home_penalties?: number | null
+          home_possession?: number | null
+          home_saves?: number | null
+          home_score?: number
+          home_shot_accuracy?: number | null
+          home_shots?: number | null
+          home_tackles?: number | null
+          home_tackles_won?: number | null
+          home_team_name?: string
+          home_xg?: number | null
+          home_yellow_cards?: number | null
+          id?: string
+          match_date?: string
+          match_mode?: string
+          photo_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
