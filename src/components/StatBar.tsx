@@ -23,11 +23,11 @@ export default function StatBar({ stat, match }: StatBarProps) {
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between text-xs">
-        <span className={`font-mono font-bold ${homeLeads ? "text-primary text-glow-cyan" : "text-foreground/60"}`}>
+        <span className={`font-mono font-bold ${homeLeads ? "text-primary" : "text-foreground/60"}`}>
           {formatStatValue(homeVal, stat.format)}
         </span>
         <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{stat.label}</span>
-        <span className={`font-mono font-bold ${awayLeads ? "text-accent text-glow-magenta" : "text-foreground/60"}`}>
+        <span className={`font-mono font-bold ${awayLeads ? "text-accent" : "text-foreground/60"}`}>
           {formatStatValue(awayVal, stat.format)}
         </span>
       </div>

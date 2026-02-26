@@ -129,7 +129,7 @@ IMPORTANT: Return ONLY valid JSON, no markdown, no explanation. The left side is
   } catch (err) {
     console.error("Error:", err);
     return new Response(
-      JSON.stringify({ error: err.message || "Internal error" }),
+      JSON.stringify({ error: (err as Error).message || "Internal error" }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
