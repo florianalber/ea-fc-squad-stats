@@ -16,11 +16,11 @@ export default function NewMatch() {
       <h1 className="text-xl font-extrabold uppercase tracking-wider">Neues Spiel</h1>
 
       {/* Tab toggle */}
-      <div className="flex rounded-xl border border-border/50 bg-muted/30 p-1 backdrop-blur-sm">
+      <div className="flex rounded-xl border border-border bg-muted/30 p-1">
         <button
           onClick={() => setEntryMode("quick")}
-          className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
-            entryMode === "quick" ? "bg-card shadow-md text-primary border border-primary/20 ea-glow-cyan" : "text-muted-foreground hover:text-foreground"
+          className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+            entryMode === "quick" ? "bg-card text-primary border border-primary/20" : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Keyboard className="h-4 w-4" />
@@ -28,8 +28,8 @@ export default function NewMatch() {
         </button>
         <button
           onClick={() => setEntryMode("photo")}
-          className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
-            entryMode === "photo" ? "bg-card shadow-md text-accent border border-accent/20 ea-glow-magenta" : "text-muted-foreground hover:text-foreground"
+          className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+            entryMode === "photo" ? "bg-card text-accent border border-accent/20" : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Camera className="h-4 w-4" />

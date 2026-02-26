@@ -75,14 +75,11 @@ export default function PhotoEntryForm() {
 
     try {
       const base64 = await fileToBase64(file);
-
       const { data, error: fnError } = await supabase.functions.invoke("parse-match-stats", {
         body: { image: base64 },
       });
-
       if (fnError) throw fnError;
       if (data?.error) throw new Error(data.error);
-
       setParsed(data as ParsedStats);
       toast.success("Statistiken erkannt!");
     } catch (err: any) {
@@ -122,8 +119,7 @@ export default function PhotoEntryForm() {
 
   return (
     <div className="space-y-4">
-      {/* Upload area */}
-      <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/20 bg-muted/10 backdrop-blur-sm p-8 cursor-pointer hover:border-accent/40 hover:bg-accent/5 transition-all">
+      <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/20 bg-muted/10 p-8 cursor-pointer hover:border-accent/40 hover:bg-accent/5 transition-colors">
         <Upload className="h-8 w-8 text-muted-foreground" />
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           {file ? file.name : "Foto des Statistik-Bildschirms hochladen"}
@@ -135,7 +131,7 @@ export default function PhotoEntryForm() {
         <button
           onClick={handleParse}
           disabled={parsing}
-          className="w-full rounded-lg ea-magenta-gradient py-3 font-bold text-accent-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-magenta transition-all hover:scale-[1.01]"
+          className="w-full rounded-lg ea-btn-accent py-3 font-bold text-accent-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm transition-colors"
         >
           {parsing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
           {parsing ? "Wird analysiert..." : "Statistiken erkennen"}
@@ -156,7 +152,6 @@ export default function PhotoEntryForm() {
             Erkannte Werte – bitte prüfen und ggf. korrigieren.
           </div>
 
-          {/* Core fields */}
           <div className="grid grid-cols-2 gap-3">
             <EditField label="Heimteam" value={parsed.home_team_name} onChange={(v) => updateField("home_team_name", v)} />
             <EditField label="Auswärtsteam" value={parsed.away_team_name} onChange={(v) => updateField("away_team_name", v)} />
@@ -164,7 +159,6 @@ export default function PhotoEntryForm() {
             <EditField label="Tore Auswärts" value={String(parsed.away_score)} onChange={(v) => updateField("away_score", v)} type="number" />
           </div>
 
-          {/* Primary stats */}
           <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Kern-Statistiken</h3>
           <div className="grid grid-cols-2 gap-3">
             <EditField label="Ballbesitz Heim %" value={String(parsed.home_possession ?? "")} onChange={(v) => updateField("home_possession", v)} type="number" />
@@ -181,14 +175,13 @@ export default function PhotoEntryForm() {
             <EditField label="Pässe Ausw." value={String(parsed.away_passes ?? "")} onChange={(v) => updateField("away_passes", v)} type="number" />
           </div>
 
-          {/* Date + Mode */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Datum</label>
             <input
               type="date"
               value={matchDate}
               onChange={(e) => setMatchDate(e.target.value)}
-              className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+              className="w-full rounded-lg border border-border bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-colors"
             />
           </div>
 
@@ -200,10 +193,10 @@ export default function PhotoEntryForm() {
                   key={key}
                   type="button"
                   onClick={() => setMatchMode(key)}
-                  className={`flex-1 rounded-lg border py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`flex-1 rounded-lg border py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
                     matchMode === key
-                      ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(187_100%_50%/0.1)]"
-                      : "border-border/50 text-muted-foreground hover:border-border hover:text-foreground"
+                      ? "border-primary/50 bg-primary/10 text-primary"
+                      : "border-border text-muted-foreground hover:border-border hover:text-foreground"
                   }`}
                 >
                   {label}
@@ -215,7 +208,7 @@ export default function PhotoEntryForm() {
           <button
             onClick={handleSubmit}
             disabled={insertMatch.isPending}
-            className="w-full rounded-lg ea-cyan-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-cyan transition-all hover:scale-[1.01]"
+            className="w-full rounded-lg ea-btn-primary py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm transition-colors"
           >
             {insertMatch.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             Spiel speichern
@@ -244,7 +237,7 @@ function EditField({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-2.5 py-2 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+        className="w-full rounded-lg border border-border bg-card px-2.5 py-2 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-colors"
       />
     </div>
   );

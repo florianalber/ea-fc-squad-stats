@@ -21,7 +21,7 @@ export default function MatchHistory() {
         <h1 className="text-xl font-extrabold uppercase tracking-wider">Match-History</h1>
         <button
           onClick={() => navigate("/new")}
-          className="flex items-center gap-1.5 rounded-lg ea-cyan-gradient px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground ea-glow-cyan transition-all hover:scale-105"
+          className="flex items-center gap-1.5 rounded-lg ea-btn-primary px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-colors"
         >
           <PlusCircle className="h-4 w-4" />
           Neu

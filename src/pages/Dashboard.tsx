@@ -55,7 +55,7 @@ export default function Dashboard() {
         <p className="text-muted-foreground text-center">Zeit für das erste Duell!</p>
         <button
           onClick={() => navigate("/new")}
-          className="flex items-center gap-2 rounded-lg ea-cyan-gradient px-6 py-3 font-bold text-primary-foreground transition-all hover:scale-105 ea-glow-cyan"
+          className="flex items-center gap-2 rounded-lg ea-btn-primary px-6 py-3 font-bold text-primary-foreground transition-colors"
         >
           <PlusCircle className="h-5 w-5" />
           Erstes Spiel erfassen
@@ -72,7 +72,6 @@ export default function Dashboard() {
   const awayStreak = getCurrentStreak(matches, "away");
   const lastThree = matches.slice(0, 3);
 
-  // Aggregierte Stats
   const homeTotalGoals = getTotalGoals(matches, "home");
   const awayTotalGoals = getTotalGoals(matches, "away");
   const homeGPG = getGoalsPerGame(matches, "home");
@@ -103,17 +102,12 @@ export default function Dashboard() {
     <div className="container pb-24 pt-6 space-y-6">
       {/* Hero Scoreboard */}
       <div className="ea-scoreboard rounded-2xl p-6 text-center relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
-        <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-primary/10 to-transparent" />
-        <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/10 to-transparent" />
-
         <div className="flex items-center justify-center gap-1.5 mb-5">
-          <Swords className="h-3.5 w-3.5 text-primary/70" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary/70">
+          <Swords className="h-3.5 w-3.5 text-muted-foreground" />
+          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground">
             Rivalry Record
           </p>
-          <Swords className="h-3.5 w-3.5 text-primary/70" />
+          <Swords className="h-3.5 w-3.5 text-muted-foreground" />
         </div>
 
         <div className="flex items-center justify-center gap-4">
@@ -121,9 +115,9 @@ export default function Dashboard() {
             <p className="text-sm font-bold text-primary mb-1 tracking-wide">{HOME_PLAYERS}</p>
           </div>
           <div className="flex items-baseline gap-3 animate-score-pop">
-            <span className="font-mono text-6xl font-black text-primary text-glow-cyan">{homeWins}</span>
+            <span className="font-mono text-6xl font-black text-primary">{homeWins}</span>
             <span className="font-mono text-2xl font-bold text-muted-foreground/30">:</span>
-            <span className="font-mono text-6xl font-black text-accent text-glow-magenta">{awayWins}</span>
+            <span className="font-mono text-6xl font-black text-accent">{awayWins}</span>
           </div>
           <div className="flex-1 text-left">
             <p className="text-sm font-bold text-accent mb-1 tracking-wide">{AWAY_PLAYERS}</p>
@@ -166,7 +160,6 @@ export default function Dashboard() {
       <div className="space-y-3">
         <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Gesamtstatistiken</h2>
 
-        {/* Tore gesamt + Pro Spiel */}
         <div className="ea-card rounded-xl p-4 space-y-3">
           <div className="flex items-center gap-2 mb-1">
             <Target className="h-4 w-4 text-primary" />
@@ -176,7 +169,6 @@ export default function Dashboard() {
           <ComparisonRow label="Pro Spiel" homeVal={homeGPG} awayVal={awayGPG} format="decimal" />
         </div>
 
-        {/* Höchster Sieg */}
         <div className="ea-card rounded-xl p-4 space-y-3">
           <div className="flex items-center gap-2 mb-1">
             <Trophy className="h-4 w-4 text-primary" />
@@ -210,7 +202,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Schüsse */}
         <div className="ea-card rounded-xl p-4 space-y-3">
           <div className="flex items-center gap-2 mb-1">
             <Crosshair className="h-4 w-4 text-primary" />
@@ -223,7 +214,6 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* xG */}
         {homeTotalXg != null && awayTotalXg != null && (
           <div className="ea-card rounded-xl p-4 space-y-3">
             <div className="flex items-center gap-2 mb-1">
@@ -237,7 +227,6 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Ballbesitz + Passgenauigkeit */}
         {(homeAvgPoss != null || homePassAcc != null) && (
           <div className="ea-card rounded-xl p-4 space-y-3">
             <div className="flex items-center gap-2 mb-1">
@@ -253,7 +242,6 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Siegesserie + Clean Sheets */}
         <div className="ea-card rounded-xl p-4 space-y-3">
           <div className="flex items-center gap-2 mb-1">
             <Zap className="h-4 w-4 text-primary" />
@@ -263,7 +251,6 @@ export default function Dashboard() {
           <ComparisonRow label="Clean Sheets" homeVal={homeClean} awayVal={awayClean} />
         </div>
 
-        {/* Verlängerung / Elfmeter */}
         {(overtime.extraTime > 0 || overtime.penalties > 0) && (
           <div className="ea-card rounded-xl p-4 space-y-2">
             <div className="flex items-center gap-2 mb-1">
@@ -295,7 +282,6 @@ export default function Dashboard() {
   );
 }
 
-/** Vergleichszeile: Heim-Wert | Label | Auswärts-Wert */
 function ComparisonRow({
   label,
   homeVal,

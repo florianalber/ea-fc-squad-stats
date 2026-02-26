@@ -13,9 +13,9 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
   const winner = getWinner(match);
 
   const borderClass = winner === "home"
-    ? "hover:border-primary/40 hover:shadow-[0_0_20px_hsl(187_100%_50%/0.08)]"
+    ? "hover:border-primary/40"
     : winner === "away"
-    ? "hover:border-accent/40 hover:shadow-[0_0_20px_hsl(340_100%_59%/0.08)]"
+    ? "hover:border-accent/40"
     : "hover:border-border/60";
 
   return (
