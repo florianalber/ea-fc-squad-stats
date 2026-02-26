@@ -70,7 +70,7 @@ export default function Dashboard() {
   const awayGD = getGoalDifference(matches, "away");
   const homeStreak = getCurrentStreak(matches, "home");
   const awayStreak = getCurrentStreak(matches, "away");
-  const lastThree = matches.slice(0, 3);
+  const lastFive = matches.slice(0, 5);
 
   const homeTotalGoals = getTotalGoals(matches, "home");
   const awayTotalGoals = getTotalGoals(matches, "away");
@@ -273,7 +273,7 @@ export default function Dashboard() {
       <div>
         <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-3">Letzte Spiele</h2>
         <div className="space-y-2">
-          {lastThree.map((match) => (
+          {lastFive.map((match) => (
             <MatchCard key={match.id} match={match} compact />
           ))}
         </div>

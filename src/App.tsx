@@ -9,6 +9,7 @@ import MatchDetail from "./pages/MatchDetail";
 import NewMatch from "./pages/NewMatch";
 import NotFound from "./pages/NotFound";
 import BottomNav from "./components/BottomNav";
+import { PendingPhotoProvider } from "./hooks/use-pending-photo";
 
 const queryClient = new QueryClient();
 
@@ -18,14 +19,16 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/history" element={<MatchHistory />} />
-          <Route path="/new" element={<NewMatch />} />
-          <Route path="/match/:id" element={<MatchDetail />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <BottomNav />
+        <PendingPhotoProvider>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/history" element={<MatchHistory />} />
+            <Route path="/new" element={<NewMatch />} />
+            <Route path="/match/:id" element={<MatchDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <BottomNav />
+        </PendingPhotoProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

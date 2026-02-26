@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useInsertMatch } from "@/hooks/use-matches";
 import { MatchMode, MATCH_MODE_LABELS } from "@/lib/match-types";
 import { toast } from "sonner";
 import { Upload, Loader2, Check, AlertCircle, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { usePendingPhoto } from "@/hooks/use-pending-photo";
 
 interface ParsedStats {
   home_team_name: string;
@@ -66,6 +67,18 @@ export default function PhotoEntryForm() {
   const [autoDetected, setAutoDetected] = useState(false);
   const insertMatch = useInsertMatch();
   const navigate = useNavigate();
+  const { consume } = usePendingPhoto();
+
+  // Wenn ein Foto über die BottomNav ausgewählt wurde, übernehmen
+  useEffect(() => {
+    const pending = consume();
+    if (pending) {
+      setFile(pending);
+      setParsed(null);
+      setError(null);
+      setAutoDetected(false);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
