@@ -123,9 +123,9 @@ export default function PhotoEntryForm() {
   return (
     <div className="space-y-4">
       {/* Upload area */}
-      <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/30 bg-secondary/20 p-8 cursor-pointer hover:border-primary/50 transition-colors">
+      <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/20 bg-muted/20 p-8 cursor-pointer hover:border-accent/40 hover:bg-accent/5 transition-all">
         <Upload className="h-8 w-8 text-muted-foreground" />
-        <span className="text-sm text-muted-foreground">
+        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           {file ? file.name : "Foto des Statistik-Bildschirms hochladen"}
         </span>
         <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
@@ -135,7 +135,7 @@ export default function PhotoEntryForm() {
         <button
           onClick={handleParse}
           disabled={parsing}
-          className="w-full rounded-lg bg-primary py-3 font-semibold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full rounded-lg bg-accent py-3 font-bold text-accent-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-teal transition-all hover:scale-[1.01]"
         >
           {parsing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
           {parsing ? "Wird analysiert…" : "Statistiken erkennen"}
@@ -143,7 +143,7 @@ export default function PhotoEntryForm() {
       )}
 
       {error && (
-        <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-sm text-destructive">
+        <div className="flex items-center gap-2 rounded-lg bg-destructive/10 border border-destructive/20 p-3 text-sm text-destructive font-medium">
           <AlertCircle className="h-4 w-4 flex-shrink-0" />
           {error}
         </div>
@@ -151,7 +151,7 @@ export default function PhotoEntryForm() {
 
       {parsed && (
         <div className="space-y-4">
-          <div className="flex items-center gap-2 rounded-lg bg-primary/10 p-3 text-sm text-primary">
+          <div className="flex items-center gap-2 rounded-lg bg-accent/10 border border-accent/20 p-3 text-xs text-accent font-bold uppercase tracking-wider">
             <Check className="h-4 w-4" />
             Erkannte Werte – bitte prüfen und ggf. korrigieren.
           </div>
@@ -165,7 +165,7 @@ export default function PhotoEntryForm() {
           </div>
 
           {/* Primary stats */}
-          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Kern-Statistiken</h3>
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Kern-Statistiken</h3>
           <div className="grid grid-cols-2 gap-3">
             <EditField label="Ballbesitz Heim %" value={String(parsed.home_possession ?? "")} onChange={(v) => updateField("home_possession", v)} type="number" />
             <EditField label="Ballbesitz Ausw. %" value={String(parsed.away_possession ?? "")} onChange={(v) => updateField("away_possession", v)} type="number" />
@@ -183,27 +183,27 @@ export default function PhotoEntryForm() {
 
           {/* Date + Mode */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-muted-foreground">Datum</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Datum</label>
             <input
               type="date"
               value={matchDate}
               onChange={(e) => setMatchDate(e.target.value)}
-              className="w-full rounded-lg border bg-card px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-muted-foreground">Spielmodus</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Spielmodus</label>
             <div className="flex gap-2">
               {(Object.entries(MATCH_MODE_LABELS) as [MatchMode, string][]).map(([key, label]) => (
                 <button
                   key={key}
                   type="button"
                   onClick={() => setMatchMode(key)}
-                  className={`flex-1 rounded-lg border py-2 text-sm font-medium transition-colors ${
+                  className={`flex-1 rounded-lg border py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
                     matchMode === key
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-secondary/50"
+                      ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(45_100%_51%/0.1)]"
+                      : "border-border/50 text-muted-foreground hover:border-border hover:text-foreground"
                   }`}
                 >
                   {label}
@@ -215,7 +215,7 @@ export default function PhotoEntryForm() {
           <button
             onClick={handleSubmit}
             disabled={insertMatch.isPending}
-            className="w-full rounded-lg bg-primary py-3 font-semibold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full rounded-lg ea-gold-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-gold transition-all hover:scale-[1.01]"
           >
             {insertMatch.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             Spiel speichern
@@ -239,12 +239,12 @@ function EditField({
 }) {
   return (
     <div className="space-y-1">
-      <label className="text-[11px] font-medium text-muted-foreground">{label}</label>
+      <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border bg-card px-2.5 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+        className="w-full rounded-lg border border-border/50 bg-card px-2.5 py-2 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
       />
     </div>
   );

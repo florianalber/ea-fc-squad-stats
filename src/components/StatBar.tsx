@@ -17,21 +17,27 @@ export default function StatBar({ stat, match }: StatBarProps) {
   const total = hv + av || 1;
   const homePercent = (hv / total) * 100;
   const awayPercent = (av / total) * 100;
+  const homeLeads = hv > av;
+  const awayLeads = av > hv;
 
   return (
-    <div className="space-y-1">
-      <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <span className="font-mono font-medium text-foreground">{formatStatValue(homeVal, stat.format)}</span>
-        <span className="text-[11px]">{stat.label}</span>
-        <span className="font-mono font-medium text-foreground">{formatStatValue(awayVal, stat.format)}</span>
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between text-xs">
+        <span className={`font-mono font-bold ${homeLeads ? "text-primary" : "text-foreground/60"}`}>
+          {formatStatValue(homeVal, stat.format)}
+        </span>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{stat.label}</span>
+        <span className={`font-mono font-bold ${awayLeads ? "text-accent" : "text-foreground/60"}`}>
+          {formatStatValue(awayVal, stat.format)}
+        </span>
       </div>
-      <div className="flex h-2 gap-0.5 rounded-full overflow-hidden">
+      <div className="flex h-1.5 gap-0.5 rounded-full overflow-hidden bg-muted/30">
         <div
-          className="rounded-l-full bg-home transition-all duration-500"
+          className={`rounded-l-full transition-all duration-500 ${homeLeads ? "bg-primary" : "bg-primary/30"}`}
           style={{ width: `${homePercent}%` }}
         />
         <div
-          className="rounded-r-full bg-away transition-all duration-500"
+          className={`rounded-r-full transition-all duration-500 ${awayLeads ? "bg-accent" : "bg-accent/30"}`}
           style={{ width: `${awayPercent}%` }}
         />
       </div>
