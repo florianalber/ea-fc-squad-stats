@@ -9,6 +9,7 @@ import {
   MatchMode,
 } from "@/lib/match-types";
 import { formatDate, getWinner } from "@/lib/match-utils";
+import { findTeamByName } from "@/lib/team-utils";
 import StatBar from "@/components/StatBar";
 import { ArrowLeft, ChevronDown, Clock, Target, Keyboard, Swords } from "lucide-react";
 import { useState } from "react";
@@ -43,6 +44,8 @@ export default function MatchDetail() {
 
   const winner = getWinner(match);
   const hasStats = match.entry_mode === "photo";
+  const homeTeam = findTeamByName(match.home_team_name);
+  const awayTeam = findTeamByName(match.away_team_name);
 
   return (
     <div className="container pb-24 pt-4 space-y-5">
@@ -69,9 +72,14 @@ export default function MatchDetail() {
 
         <div className="flex items-center justify-center gap-4">
           <div className="flex-1 text-right">
-            <p className={`text-base font-extrabold tracking-wide ${winner === "home" ? "text-primary" : "text-foreground/50"}`}>
-              {match.home_team_name}
-            </p>
+            <div className="flex items-center justify-end gap-2 mb-0.5">
+              <p className={`text-base font-extrabold tracking-wide ${winner === "home" ? "text-primary" : "text-foreground/50"}`}>
+                {match.home_team_name}
+              </p>
+              {homeTeam?.logoUrl && (
+                <img src={homeTeam.logoUrl} alt="" className="h-7 w-7 object-contain" />
+              )}
+            </div>
             <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{HOME_PLAYERS}</p>
           </div>
           <div className="flex items-baseline gap-2">
@@ -84,9 +92,14 @@ export default function MatchDetail() {
             </span>
           </div>
           <div className="flex-1 text-left">
-            <p className={`text-base font-extrabold tracking-wide ${winner === "away" ? "text-accent" : "text-foreground/50"}`}>
-              {match.away_team_name}
-            </p>
+            <div className="flex items-center gap-2 mb-0.5">
+              {awayTeam?.logoUrl && (
+                <img src={awayTeam.logoUrl} alt="" className="h-7 w-7 object-contain" />
+              )}
+              <p className={`text-base font-extrabold tracking-wide ${winner === "away" ? "text-accent" : "text-foreground/50"}`}>
+                {match.away_team_name}
+              </p>
+            </div>
             <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{AWAY_PLAYERS}</p>
           </div>
         </div>

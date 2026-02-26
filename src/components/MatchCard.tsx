@@ -1,5 +1,6 @@
 import { Match, HOME_PLAYERS, AWAY_PLAYERS, MATCH_MODE_LABELS, MatchMode } from "@/lib/match-types";
 import { formatDate, getWinner } from "@/lib/match-utils";
+import { findTeamByName } from "@/lib/team-utils";
 import { useNavigate } from "react-router-dom";
 import { Clock, Target, Keyboard } from "lucide-react";
 
@@ -11,6 +12,8 @@ interface MatchCardProps {
 export default function MatchCard({ match, compact }: MatchCardProps) {
   const navigate = useNavigate();
   const winner = getWinner(match);
+  const homeTeam = findTeamByName(match.home_team_name);
+  const awayTeam = findTeamByName(match.away_team_name);
 
   const borderClass = winner === "home"
     ? "hover:border-primary/40"
@@ -41,8 +44,11 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
       </div>
 
       <div className="flex items-center justify-between gap-2">
-        <div className={`flex-1 text-sm font-bold truncate ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
-          {match.home_team_name}
+        <div className={`flex-1 flex items-center gap-1.5 min-w-0 ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
+          {homeTeam?.logoUrl && (
+            <img src={homeTeam.logoUrl} alt="" className="h-5 w-5 flex-shrink-0 object-contain" />
+          )}
+          <span className="text-sm font-bold truncate">{match.home_team_name}</span>
         </div>
         <div className="flex items-center gap-1.5 rounded-lg bg-score px-3 py-1.5 border border-border/50">
           <span className={`font-mono text-lg font-black ${winner === "home" ? "text-primary" : "text-score-foreground/60"}`}>
@@ -53,8 +59,11 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
             {match.away_score}
           </span>
         </div>
-        <div className={`flex-1 text-sm font-bold text-right truncate ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
-          {match.away_team_name}
+        <div className={`flex-1 flex items-center justify-end gap-1.5 min-w-0 ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
+          <span className="text-sm font-bold truncate">{match.away_team_name}</span>
+          {awayTeam?.logoUrl && (
+            <img src={awayTeam.logoUrl} alt="" className="h-5 w-5 flex-shrink-0 object-contain" />
+          )}
         </div>
       </div>
 

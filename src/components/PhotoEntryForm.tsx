@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Upload, Loader2, Check, AlertCircle, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { usePendingPhoto } from "@/hooks/use-pending-photo";
+import TeamAutocomplete from "@/components/TeamAutocomplete";
 
 interface ParsedStats {
   home_team_name: string;
@@ -197,8 +198,22 @@ export default function PhotoEntryForm() {
 
           {/* Core fields */}
           <div className="grid grid-cols-2 gap-3">
-            <EditField label="Heimteam" value={parsed.home_team_name} onChange={(v) => updateField("home_team_name", v)} />
-            <EditField label="Auswärtsteam" value={parsed.away_team_name} onChange={(v) => updateField("away_team_name", v)} />
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Heimteam</label>
+              <TeamAutocomplete
+                value={parsed.home_team_name}
+                onChange={(v) => updateField("home_team_name", v)}
+                accent="primary"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Auswärtsteam</label>
+              <TeamAutocomplete
+                value={parsed.away_team_name}
+                onChange={(v) => updateField("away_team_name", v)}
+                accent="accent"
+              />
+            </div>
             <EditField label="Tore Heim" value={String(parsed.home_score)} onChange={(v) => updateField("home_score", v)} type="number" />
             <EditField label="Tore Auswärts" value={String(parsed.away_score)} onChange={(v) => updateField("away_score", v)} type="number" />
           </div>

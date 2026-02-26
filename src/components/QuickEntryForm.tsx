@@ -4,6 +4,7 @@ import { useInsertMatch } from "@/hooks/use-matches";
 import { MatchMode, MATCH_MODE_LABELS } from "@/lib/match-types";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import TeamAutocomplete from "@/components/TeamAutocomplete";
 
 export default function QuickEntryForm() {
   const [homeTeam, setHomeTeam] = useState("");
@@ -62,20 +63,20 @@ export default function QuickEntryForm() {
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
           <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Heimteam (Verein)</label>
-          <input
+          <TeamAutocomplete
             value={homeTeam}
-            onChange={(e) => setHomeTeam(e.target.value)}
+            onChange={setHomeTeam}
             placeholder="z.B. Real Madrid"
-            className="w-full rounded-lg border border-border bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-colors placeholder:text-muted-foreground/40"
+            accent="primary"
           />
         </div>
         <div className="space-y-1.5">
           <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Auswärtsteam (Verein)</label>
-          <input
+          <TeamAutocomplete
             value={awayTeam}
-            onChange={(e) => setAwayTeam(e.target.value)}
+            onChange={setAwayTeam}
             placeholder="z.B. FC Bayern"
-            className="w-full rounded-lg border border-border bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/40 transition-colors placeholder:text-muted-foreground/40"
+            accent="accent"
           />
         </div>
       </div>
