@@ -52,8 +52,11 @@ export default function MatchDetail() {
 
       {/* Header */}
       <div className="ea-scoreboard rounded-2xl p-5 text-center space-y-3 relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+        {/* Corner accents */}
+        <div className="absolute top-0 left-0 w-12 h-12 bg-gradient-to-br from-primary/8 to-transparent" />
+        <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-accent/8 to-transparent" />
 
         <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground">
           <span className="font-bold uppercase tracking-[0.15em]">{formatDate(match.match_date)}</span>
@@ -78,11 +81,11 @@ export default function MatchDetail() {
             <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{HOME_PLAYERS}</p>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className={`font-mono text-4xl font-black ${winner === "home" ? "text-primary drop-shadow-[0_0_8px_hsl(45_100%_51%/0.3)]" : "text-foreground/30"}`}>
+            <span className={`font-mono text-5xl font-black ${winner === "home" ? "text-primary text-glow-cyan" : "text-foreground/30"}`}>
               {match.home_score}
             </span>
             <span className="font-mono text-xl text-muted-foreground/30 font-bold">:</span>
-            <span className={`font-mono text-4xl font-black ${winner === "away" ? "text-accent drop-shadow-[0_0_8px_hsl(170_70%_45%/0.3)]" : "text-foreground/30"}`}>
+            <span className={`font-mono text-5xl font-black ${winner === "away" ? "text-accent text-glow-magenta" : "text-foreground/30"}`}>
               {match.away_score}
             </span>
           </div>

@@ -23,21 +23,21 @@ export default function StatBar({ stat, match }: StatBarProps) {
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between text-xs">
-        <span className={`font-mono font-bold ${homeLeads ? "text-primary" : "text-foreground/60"}`}>
+        <span className={`font-mono font-bold ${homeLeads ? "text-primary text-glow-cyan" : "text-foreground/60"}`}>
           {formatStatValue(homeVal, stat.format)}
         </span>
         <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{stat.label}</span>
-        <span className={`font-mono font-bold ${awayLeads ? "text-accent" : "text-foreground/60"}`}>
+        <span className={`font-mono font-bold ${awayLeads ? "text-accent text-glow-magenta" : "text-foreground/60"}`}>
           {formatStatValue(awayVal, stat.format)}
         </span>
       </div>
       <div className="flex h-1.5 gap-0.5 rounded-full overflow-hidden bg-muted/30">
         <div
-          className={`rounded-l-full transition-all duration-500 ${homeLeads ? "bg-primary" : "bg-primary/30"}`}
+          className={`rounded-l-full transition-all duration-500 ${homeLeads ? "stat-bar-home" : "stat-bar-home-dim"}`}
           style={{ width: `${homePercent}%` }}
         />
         <div
-          className={`rounded-r-full transition-all duration-500 ${awayLeads ? "bg-accent" : "bg-accent/30"}`}
+          className={`rounded-r-full transition-all duration-500 ${awayLeads ? "stat-bar-away" : "stat-bar-away-dim"}`}
           style={{ width: `${awayPercent}%` }}
         />
       </div>

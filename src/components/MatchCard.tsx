@@ -12,10 +12,16 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
   const navigate = useNavigate();
   const winner = getWinner(match);
 
+  const borderClass = winner === "home"
+    ? "hover:border-primary/40 hover:shadow-[0_0_20px_hsl(187_100%_50%/0.08)]"
+    : winner === "away"
+    ? "hover:border-accent/40 hover:shadow-[0_0_20px_hsl(340_100%_59%/0.08)]"
+    : "hover:border-border/60";
+
   return (
     <button
       onClick={() => navigate(`/match/${match.id}`)}
-      className="w-full ea-card rounded-xl p-3 text-left transition-all hover:border-primary/30 hover:shadow-[0_0_15px_hsl(45_100%_51%/0.05)]"
+      className={`w-full ea-card rounded-xl p-3 text-left transition-all ${borderClass}`}
     >
       <div className="flex items-center justify-between text-[10px] text-muted-foreground mb-2">
         <span className="font-medium uppercase tracking-wider">{formatDate(match.match_date)}</span>

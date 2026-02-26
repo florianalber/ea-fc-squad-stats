@@ -123,7 +123,7 @@ export default function PhotoEntryForm() {
   return (
     <div className="space-y-4">
       {/* Upload area */}
-      <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/20 bg-muted/20 p-8 cursor-pointer hover:border-accent/40 hover:bg-accent/5 transition-all">
+      <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/20 bg-muted/10 backdrop-blur-sm p-8 cursor-pointer hover:border-accent/40 hover:bg-accent/5 transition-all">
         <Upload className="h-8 w-8 text-muted-foreground" />
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           {file ? file.name : "Foto des Statistik-Bildschirms hochladen"}
@@ -135,10 +135,10 @@ export default function PhotoEntryForm() {
         <button
           onClick={handleParse}
           disabled={parsing}
-          className="w-full rounded-lg bg-accent py-3 font-bold text-accent-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-teal transition-all hover:scale-[1.01]"
+          className="w-full rounded-lg ea-magenta-gradient py-3 font-bold text-accent-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-magenta transition-all hover:scale-[1.01]"
         >
           {parsing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
-          {parsing ? "Wird analysiert…" : "Statistiken erkennen"}
+          {parsing ? "Wird analysiert..." : "Statistiken erkennen"}
         </button>
       )}
 
@@ -151,7 +151,7 @@ export default function PhotoEntryForm() {
 
       {parsed && (
         <div className="space-y-4">
-          <div className="flex items-center gap-2 rounded-lg bg-accent/10 border border-accent/20 p-3 text-xs text-accent font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 rounded-lg bg-primary/10 border border-primary/20 p-3 text-xs text-primary font-bold uppercase tracking-wider">
             <Check className="h-4 w-4" />
             Erkannte Werte – bitte prüfen und ggf. korrigieren.
           </div>
@@ -188,7 +188,7 @@ export default function PhotoEntryForm() {
               type="date"
               value={matchDate}
               onChange={(e) => setMatchDate(e.target.value)}
-              className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+              className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
             />
           </div>
 
@@ -202,7 +202,7 @@ export default function PhotoEntryForm() {
                   onClick={() => setMatchMode(key)}
                   className={`flex-1 rounded-lg border py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
                     matchMode === key
-                      ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(45_100%_51%/0.1)]"
+                      ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(187_100%_50%/0.1)]"
                       : "border-border/50 text-muted-foreground hover:border-border hover:text-foreground"
                   }`}
                 >
@@ -215,7 +215,7 @@ export default function PhotoEntryForm() {
           <button
             onClick={handleSubmit}
             disabled={insertMatch.isPending}
-            className="w-full rounded-lg ea-gold-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-gold transition-all hover:scale-[1.01]"
+            className="w-full rounded-lg ea-cyan-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-cyan transition-all hover:scale-[1.01]"
           >
             {insertMatch.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             Spiel speichern
@@ -244,7 +244,7 @@ function EditField({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-border/50 bg-card px-2.5 py-2 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+        className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-2.5 py-2 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
       />
     </div>
   );

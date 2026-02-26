@@ -66,7 +66,7 @@ export default function QuickEntryForm() {
             value={homeTeam}
             onChange={(e) => setHomeTeam(e.target.value)}
             placeholder="z.B. Real Madrid"
-            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors placeholder:text-muted-foreground/40"
+            className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors placeholder:text-muted-foreground/40"
           />
         </div>
         <div className="space-y-1.5">
@@ -75,7 +75,7 @@ export default function QuickEntryForm() {
             value={awayTeam}
             onChange={(e) => setAwayTeam(e.target.value)}
             placeholder="z.B. FC Bayern"
-            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors placeholder:text-muted-foreground/40"
+            className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/50 transition-colors placeholder:text-muted-foreground/40"
           />
         </div>
       </div>
@@ -89,7 +89,7 @@ export default function QuickEntryForm() {
             value={homeScore}
             onChange={(e) => setHomeScore(e.target.value)}
             placeholder="0"
-            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-mono font-bold outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+            className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-mono font-bold outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
           />
         </div>
         <div className="space-y-1.5">
@@ -100,7 +100,7 @@ export default function QuickEntryForm() {
             value={awayScore}
             onChange={(e) => setAwayScore(e.target.value)}
             placeholder="0"
-            className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-mono font-bold outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+            className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-mono font-bold outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/50 transition-colors"
           />
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function QuickEntryForm() {
           type="date"
           value={matchDate}
           onChange={(e) => setMatchDate(e.target.value)}
-          className="w-full rounded-lg border border-border/50 bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+          className="w-full rounded-lg border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-colors"
         />
       </div>
 
@@ -125,7 +125,7 @@ export default function QuickEntryForm() {
               onClick={() => setMatchMode(key)}
               className={`flex-1 rounded-lg border py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
                 matchMode === key
-                  ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(45_100%_51%/0.1)]"
+                  ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_10px_hsl(187_100%_50%/0.1)]"
                   : "border-border/50 text-muted-foreground hover:border-border hover:text-foreground"
               }`}
             >
@@ -142,7 +142,7 @@ export default function QuickEntryForm() {
       <button
         type="submit"
         disabled={!canSubmit || insertMatch.isPending}
-        className="w-full rounded-lg ea-gold-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-gold transition-all hover:scale-[1.01]"
+        className="w-full rounded-lg ea-cyan-gradient py-3 font-bold text-primary-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-cyan transition-all hover:scale-[1.01] hover:ea-glow-cyan-strong"
       >
         {insertMatch.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
         Spiel speichern
