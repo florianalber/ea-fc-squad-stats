@@ -37,6 +37,7 @@ Return a JSON object with EXACTLY these keys (use null if a value is not visible
   "away_team_name": "string - right team name", 
   "home_score": number,
   "away_score": number,
+  "minutes_played": number (total minutes played, e.g. 90, 120, 122 - look for the match time/duration on the screen, often shown near the score or at the top),
   "home_possession": number (percentage, e.g. 55),
   "away_possession": number,
   "home_shots": number,
