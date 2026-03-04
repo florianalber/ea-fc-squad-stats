@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#0f0f2a"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#00b8d4"/>
+    </linearGradient>
+    <linearGradient id="magenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2d78"/>
+      <stop offset="100%" stop-color="#e91e63"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="62" fill="url(#bg)" stroke="url(#cyan)" stroke-width="2.5"/>
+  <!-- Football pentagon pattern - center -->
+  <polygon points="64,38 78,47 74,63 54,63 50,47" fill="none" stroke="url(#cyan)" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Top -->
+  <line x1="64" y1="38" x2="64" y2="22" stroke="url(#cyan)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Top-right -->
+  <line x1="78" y1="47" x2="90" y2="36" stroke="url(#cyan)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Bottom-right -->
+  <line x1="74" y1="63" x2="92" y2="68" stroke="url(#cyan)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Bottom-left -->
+  <line x1="54" y1="63" x2="36" y2="68" stroke="url(#cyan)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Top-left -->
+  <line x1="50" y1="47" x2="38" y2="36" stroke="url(#cyan)" stroke-width="2" stroke-linecap="round"/>
+  <!-- VS text -->
+  <text x="64" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="24" fill="url(#magenta)" letter-spacing="2">VS</text>
+</svg>
