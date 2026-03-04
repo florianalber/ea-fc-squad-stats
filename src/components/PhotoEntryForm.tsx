@@ -304,11 +304,43 @@ function EditField({
   );
 }
 
+/**
+ * Convert any image file to a JPEG base64 data URL via Canvas.
+ * This ensures compatibility with Claude Vision API (which only supports
+ * jpeg/png/gif/webp) and also reduces file size for large phone photos.
+ * Max dimension is capped at 2048px to stay within API limits.
+ */
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const MAX_DIM = 2048;
+      let { width, height } = img;
+
+      // Scale down if needed
+      if (width > MAX_DIM || height > MAX_DIM) {
+        const scale = MAX_DIM / Math.max(width, height);
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("Canvas not supported"));
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Export as JPEG (good quality, compatible with Claude API)
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+      URL.revokeObjectURL(img.src);
+      resolve(dataUrl);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(img.src);
+      reject(new Error("Could not load image"));
+    };
+    // Use object URL so the browser decodes the image (works for HEIC, WebP, etc.)
+    img.src = URL.createObjectURL(file);
   });
 }
