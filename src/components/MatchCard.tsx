@@ -53,12 +53,12 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
             <span className="text-[10px] font-mono font-bold text-muted-foreground/40 flex-shrink-0">{homeTeam.overall}</span>
           )}
         </div>
-        <div className="flex items-center gap-1.5 rounded-lg bg-score px-3 py-1.5 border border-border/50">
-          <span className={`font-mono text-lg font-black ${winner === "home" ? "text-primary" : "text-score-foreground/60"}`}>
+        <div className="flex items-center gap-2 rounded-lg bg-score px-4 py-2 border border-border/50">
+          <span className={`font-mono text-2xl font-black ${winner === "home" ? "text-primary" : "text-score-foreground/80"}`}>
             {match.home_score}
           </span>
-          <span className="text-muted-foreground/30 font-mono font-bold">:</span>
-          <span className={`font-mono text-lg font-black ${winner === "away" ? "text-accent" : "text-score-foreground/60"}`}>
+          <span className="text-muted-foreground/40 font-mono text-lg font-bold">:</span>
+          <span className={`font-mono text-2xl font-black ${winner === "away" ? "text-accent" : "text-score-foreground/80"}`}>
             {match.away_score}
           </span>
         </div>
