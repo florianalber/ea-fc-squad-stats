@@ -105,17 +105,20 @@ export default function TeamAutocomplete({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className={`w-full rounded-lg border border-border bg-card px-3 py-2.5 text-sm font-medium outline-none focus:ring-2 transition-colors placeholder:text-muted-foreground/40 ${ringClass} ${
-            matched ? "pr-10" : ""
+            matched ? "pr-16" : ""
           } ${inputClassName}`}
           autoComplete="off"
         />
-        {/* Team logo badge when matched */}
-        {matched?.logoUrl && (
-          <img
-            src={matched.logoUrl}
-            alt=""
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 h-5 w-5 object-contain pointer-events-none"
-          />
+        {/* Team logo + OVR badge when matched */}
+        {matched && (
+          <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 pointer-events-none">
+            {matched.overall != null && (
+              <span className="text-[10px] font-mono font-bold text-muted-foreground/60">{matched.overall}</span>
+            )}
+            {matched.logoUrl && (
+              <img src={matched.logoUrl} alt="" className="h-5 w-5 object-contain" />
+            )}
+          </div>
         )}
       </div>
 
@@ -145,6 +148,9 @@ export default function TeamAutocomplete({
                 <span className="h-5 w-5 flex-shrink-0 rounded bg-muted/30" />
               )}
               <span className="truncate font-medium">{team.name}</span>
+              {team.overall != null && (
+                <span className="flex-shrink-0 text-[10px] font-mono font-bold text-muted-foreground/50">{team.overall}</span>
+              )}
               {team.league && (
                 <span className="ml-auto flex-shrink-0 text-[10px] text-muted-foreground/60 uppercase tracking-wider">
                   {team.league}

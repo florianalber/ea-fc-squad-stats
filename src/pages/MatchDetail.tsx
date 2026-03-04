@@ -80,7 +80,12 @@ export default function MatchDetail() {
                 <img src={homeTeam.logoUrl} alt="" className="h-7 w-7 object-contain" />
               )}
             </div>
-            <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{HOME_PLAYERS}</p>
+            <div className="flex items-center justify-end gap-1.5">
+              {homeTeam?.overall != null && (
+                <span className="text-[10px] font-mono font-bold text-muted-foreground/40">{homeTeam.overall} GES</span>
+              )}
+              <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{HOME_PLAYERS}</p>
+            </div>
           </div>
           <div className="flex items-baseline gap-2">
             <span className={`font-mono text-5xl font-black ${winner === "home" ? "text-primary" : "text-foreground/30"}`}>
@@ -100,7 +105,12 @@ export default function MatchDetail() {
                 {match.away_team_name}
               </p>
             </div>
-            <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{AWAY_PLAYERS}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="text-[10px] text-muted-foreground/50 font-medium uppercase tracking-wider">{AWAY_PLAYERS}</p>
+              {awayTeam?.overall != null && (
+                <span className="text-[10px] font-mono font-bold text-muted-foreground/40">{awayTeam.overall} GES</span>
+              )}
+            </div>
           </div>
         </div>
       </div>

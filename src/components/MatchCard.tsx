@@ -49,6 +49,9 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
             <img src={homeTeam.logoUrl} alt="" className="h-5 w-5 flex-shrink-0 object-contain" />
           )}
           <span className="text-sm font-bold truncate">{match.home_team_name}</span>
+          {homeTeam?.overall != null && (
+            <span className="text-[10px] font-mono font-bold text-muted-foreground/40 flex-shrink-0">{homeTeam.overall}</span>
+          )}
         </div>
         <div className="flex items-center gap-1.5 rounded-lg bg-score px-3 py-1.5 border border-border/50">
           <span className={`font-mono text-lg font-black ${winner === "home" ? "text-primary" : "text-score-foreground/60"}`}>
@@ -60,6 +63,9 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
           </span>
         </div>
         <div className={`flex-1 flex items-center justify-end gap-1.5 min-w-0 ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
+          {awayTeam?.overall != null && (
+            <span className="text-[10px] font-mono font-bold text-muted-foreground/40 flex-shrink-0">{awayTeam.overall}</span>
+          )}
           <span className="text-sm font-bold truncate">{match.away_team_name}</span>
           {awayTeam?.logoUrl && (
             <img src={awayTeam.logoUrl} alt="" className="h-5 w-5 flex-shrink-0 object-contain" />

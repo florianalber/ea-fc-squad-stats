@@ -6,6 +6,7 @@ export interface Team {
   logoUrl: string | null;
   league: string;
   isPopular: boolean;
+  overall?: number;
 }
 
 // Pre-sorted by name for display; build a lowercase index for fast search
