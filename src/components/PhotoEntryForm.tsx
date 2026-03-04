@@ -4,7 +4,7 @@ import { useInsertMatch } from "@/hooks/use-matches";
 import { MatchMode, MATCH_MODE_LABELS } from "@/lib/match-types";
 import { toast } from "sonner";
 import { Upload, Loader2, Check, AlertCircle, Clock } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { parseMatchStats } from "@/lib/match-api";
 import { usePendingPhoto } from "@/hooks/use-pending-photo";
 import TeamAutocomplete from "@/components/TeamAutocomplete";
 
@@ -98,10 +98,7 @@ export default function PhotoEntryForm() {
 
     try {
       const base64 = await fileToBase64(file);
-      const { data, error: fnError } = await supabase.functions.invoke("parse-match-stats", {
-        body: { image: base64 },
-      });
-      if (fnError) throw fnError;
+      const data = await parseMatchStats(base64);
       if (data?.error) throw new Error(data.error);
 
       const stats = data as ParsedStats;

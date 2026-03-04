@@ -1,6 +1,55 @@
-import { Tables } from "@/integrations/supabase/types";
-
-export type Match = Tables<"matches">;
+// Match type matching PocketBase 'matches' collection schema
+export interface Match {
+  id: string;
+  created: string;
+  updated: string;
+  collectionId: string;
+  collectionName: string;
+  match_date: string;
+  home_team_name: string;
+  away_team_name: string;
+  home_score: number;
+  away_score: number;
+  match_mode: string;
+  entry_mode: string;
+  home_possession: number | null;
+  away_possession: number | null;
+  home_shots: number | null;
+  away_shots: number | null;
+  home_xg: number | null;
+  away_xg: number | null;
+  home_shot_accuracy: number | null;
+  away_shot_accuracy: number | null;
+  home_pass_accuracy: number | null;
+  away_pass_accuracy: number | null;
+  home_passes: number | null;
+  away_passes: number | null;
+  home_dribble_success: number | null;
+  away_dribble_success: number | null;
+  home_tackles: number | null;
+  away_tackles: number | null;
+  home_tackles_won: number | null;
+  away_tackles_won: number | null;
+  home_ball_recovery_time: number | null;
+  away_ball_recovery_time: number | null;
+  home_interceptions: number | null;
+  away_interceptions: number | null;
+  home_saves: number | null;
+  away_saves: number | null;
+  home_fouls: number | null;
+  away_fouls: number | null;
+  home_offsides: number | null;
+  away_offsides: number | null;
+  home_corners: number | null;
+  away_corners: number | null;
+  home_free_kicks: number | null;
+  away_free_kicks: number | null;
+  home_penalties: number | null;
+  away_penalties: number | null;
+  home_yellow_cards: number | null;
+  away_yellow_cards: number | null;
+  photo_url: string | null;
+}
 
 export const HOME_PLAYERS = "Jeniffen + Florian";
 export const AWAY_PLAYERS = "Dirk + Niklas";
