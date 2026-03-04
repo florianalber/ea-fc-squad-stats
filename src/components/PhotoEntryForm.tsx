@@ -91,35 +91,46 @@ export default function PhotoEntryForm() {
     }
   };
 
-  const handleParse = async () => {
-    if (!file) return;
-    setParsing(true);
-    setError(null);
+  // Automatisch Statistiken erkennen sobald ein Bild ausgewählt wird
+  useEffect(() => {
+    if (!file || parsing || parsed) return;
 
-    try {
-      const base64 = await fileToBase64(file);
-      const data = await parseMatchStats(base64);
-      if (data?.error) throw new Error(data.error);
+    let cancelled = false;
 
-      const stats = data as ParsedStats;
-      setParsed(stats);
+    (async () => {
+      setParsing(true);
+      setError(null);
 
-      // Spielmodus automatisch aus Minuten ableiten
-      const inferred = inferMatchMode(stats.minutes_played);
-      if (inferred !== "regular") {
-        setMatchMode(inferred);
-        setAutoDetected(true);
-        toast.success(`Statistiken erkannt! Verlängerung erkannt (${stats.minutes_played} Min.)`);
-      } else {
-        toast.success("Statistiken erkannt!");
+      try {
+        const base64 = await fileToBase64(file);
+        if (cancelled) return;
+        const data = await parseMatchStats(base64);
+        if (cancelled) return;
+        if (data?.error) throw new Error(data.error);
+
+        const stats = data as ParsedStats;
+        setParsed(stats);
+
+        const inferred = inferMatchMode(stats.minutes_played);
+        if (inferred !== "regular") {
+          setMatchMode(inferred);
+          setAutoDetected(true);
+          toast.success(`Statistiken erkannt! Verlängerung erkannt (${stats.minutes_played} Min.)`);
+        } else {
+          toast.success("Statistiken erkannt!");
+        }
+      } catch (err: any) {
+        if (!cancelled) {
+          setError(err?.message || "Fehler bei der Erkennung.");
+          toast.error("Erkennung fehlgeschlagen.");
+        }
+      } finally {
+        if (!cancelled) setParsing(false);
       }
-    } catch (err: any) {
-      setError(err?.message || "Fehler bei der Erkennung.");
-      toast.error("Erkennung fehlgeschlagen.");
-    } finally {
-      setParsing(false);
-    }
-  };
+    })();
+
+    return () => { cancelled = true; };
+  }, [file]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async () => {
     if (!parsed) return;
@@ -160,15 +171,11 @@ export default function PhotoEntryForm() {
         <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
       </label>
 
-      {file && !parsed && (
-        <button
-          onClick={handleParse}
-          disabled={parsing}
-          className="w-full rounded-lg ea-magenta-gradient py-3 font-bold text-accent-foreground disabled:opacity-50 flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-magenta transition-all hover:scale-[1.01]"
-        >
-          {parsing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
-          {parsing ? "Wird analysiert..." : "Statistiken erkennen"}
-        </button>
+      {parsing && (
+        <div className="w-full rounded-lg ea-magenta-gradient py-3 font-bold text-accent-foreground flex items-center justify-center gap-2 uppercase tracking-wider text-sm ea-glow-magenta">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Wird analysiert...
+        </div>
       )}
 
       {error && (
