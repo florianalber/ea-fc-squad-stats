@@ -43,16 +43,25 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-2">
-        <div className={`flex-1 flex items-center gap-1.5 min-w-0 ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+        {/* Home Team – left-aligned */}
+        <div className="flex items-center gap-2 min-w-0">
           {homeTeam?.logoUrl && (
-            <img src={homeTeam.logoUrl} alt="" className="h-5 w-5 flex-shrink-0 object-contain" />
+            <img src={homeTeam.logoUrl} alt="" className="h-10 w-10 flex-shrink-0 object-contain" />
           )}
-          <span className="text-sm font-bold truncate">{match.home_team_name}</span>
-          {homeTeam?.overall != null && (
-            <span className="text-[10px] font-mono font-bold text-muted-foreground/40 flex-shrink-0">{homeTeam.overall}</span>
-          )}
+          <div className="flex flex-col items-start min-w-0">
+            <span className={`text-sm font-bold truncate max-w-full leading-tight ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
+              {match.home_team_name}
+            </span>
+            {homeTeam?.overall != null && (
+              <span className={`mt-0.5 text-[10px] font-mono font-bold rounded-md px-1.5 py-0.5 leading-none ${winner === "home" ? "bg-primary/15 text-primary/80" : "bg-muted/40 text-muted-foreground/50"}`}>
+                {homeTeam.overall} GES
+              </span>
+            )}
+          </div>
         </div>
+
+        {/* Score – center */}
         <div className="flex items-center gap-1 rounded-xl bg-score px-5 py-1.5 border border-border/50 shadow-sm shadow-black/20">
           <span className={`font-mono text-3xl font-black leading-none tabular-nums ${winner === "home" ? "text-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]" : "text-score-foreground/80"}`}>
             {match.home_score}
@@ -62,13 +71,21 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
             {match.away_score}
           </span>
         </div>
-        <div className={`flex-1 flex items-center justify-end gap-1.5 min-w-0 ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
-          {awayTeam?.overall != null && (
-            <span className="text-[10px] font-mono font-bold text-muted-foreground/40 flex-shrink-0">{awayTeam.overall}</span>
-          )}
-          <span className="text-sm font-bold truncate">{match.away_team_name}</span>
+
+        {/* Away Team – right-aligned */}
+        <div className="flex items-center justify-end gap-2 min-w-0">
+          <div className="flex flex-col items-end min-w-0">
+            <span className={`text-sm font-bold truncate max-w-full leading-tight ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
+              {match.away_team_name}
+            </span>
+            {awayTeam?.overall != null && (
+              <span className={`mt-0.5 text-[10px] font-mono font-bold rounded-md px-1.5 py-0.5 leading-none ${winner === "away" ? "bg-accent/15 text-accent/80" : "bg-muted/40 text-muted-foreground/50"}`}>
+                {awayTeam.overall} GES
+              </span>
+            )}
+          </div>
           {awayTeam?.logoUrl && (
-            <img src={awayTeam.logoUrl} alt="" className="h-5 w-5 flex-shrink-0 object-contain" />
+            <img src={awayTeam.logoUrl} alt="" className="h-10 w-10 flex-shrink-0 object-contain" />
           )}
         </div>
       </div>
