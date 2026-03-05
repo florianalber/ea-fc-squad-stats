@@ -41,14 +41,14 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
         )}
       </div>
 
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1.5">
-        {/* Home Team – logo left (outer), name+GES right (toward score) */}
-        <div className="flex items-center gap-2 min-w-0">
+      <div className="flex items-center justify-center gap-3">
+        {/* Home Team */}
+        <div className="flex items-center gap-1.5 min-w-0 flex-1 justify-end">
           {homeTeam?.logoUrl && (
             <img src={homeTeam.logoUrl} alt="" className="h-10 w-10 flex-shrink-0 object-contain" />
           )}
-          <div className="flex flex-col items-end min-w-0 flex-1">
-            <span className={`text-sm font-bold truncate max-w-full leading-tight ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
+          <div className="flex flex-col items-end min-w-0">
+            <span className={`text-xs font-bold truncate max-w-full leading-tight ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
               {match.home_team_name}
             </span>
             {homeTeam?.overall != null && (
@@ -59,8 +59,8 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
           </div>
         </div>
 
-        {/* Score – center */}
-        <div className="flex items-center gap-1 rounded-xl bg-score px-4 py-1.5 border border-border/50 shadow-sm shadow-black/20">
+        {/* Score */}
+        <div className="flex items-center gap-1 rounded-xl bg-score px-4 py-1.5 border border-border/50 shadow-sm shadow-black/20 flex-shrink-0">
           <span className={`font-mono text-3xl font-black leading-none tabular-nums ${winner === "home" ? "text-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]" : "text-score-foreground/80"}`}>
             {match.home_score}
           </span>
@@ -70,10 +70,10 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
           </span>
         </div>
 
-        {/* Away Team – name+GES left (toward score), logo right (outer) */}
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="flex flex-col items-start min-w-0 flex-1">
-            <span className={`text-sm font-bold truncate max-w-full leading-tight ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
+        {/* Away Team */}
+        <div className="flex items-center gap-1.5 min-w-0 flex-1 justify-start">
+          <div className="flex flex-col items-start min-w-0">
+            <span className={`text-xs font-bold truncate max-w-full leading-tight ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
               {match.away_team_name}
             </span>
             {awayTeam?.overall != null && (
