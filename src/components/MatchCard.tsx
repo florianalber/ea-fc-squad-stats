@@ -26,30 +26,28 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
       onClick={() => navigate(`/match/${match.id}`)}
       className={`w-full ea-card rounded-xl p-3 text-left transition-all ${borderClass}`}
     >
-      <div className="flex items-center justify-between text-[10px] text-muted-foreground mb-2">
+      <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground mb-2">
         <span className="font-medium uppercase tracking-wider">{formatDate(match.match_date)}</span>
-        <div className="flex items-center gap-1.5">
-          {match.match_mode !== "regular" && (
-            <span className="flex items-center gap-0.5 rounded-md bg-primary/10 px-1.5 py-0.5 text-primary font-bold uppercase tracking-wider">
-              {match.match_mode === "extra_time" ? <Clock className="h-3 w-3" /> : <Target className="h-3 w-3" />}
-              {MATCH_MODE_LABELS[match.match_mode as MatchMode]}
-            </span>
-          )}
-          {match.entry_mode === "quick" && (
-            <span className="flex items-center gap-0.5 text-muted-foreground/50">
-              <Keyboard className="h-3 w-3" />
-            </span>
-          )}
-        </div>
+        {match.match_mode !== "regular" && (
+          <span className="flex items-center gap-0.5 rounded-md bg-primary/10 px-1.5 py-0.5 text-primary font-bold uppercase tracking-wider">
+            {match.match_mode === "extra_time" ? <Clock className="h-3 w-3" /> : <Target className="h-3 w-3" />}
+            {MATCH_MODE_LABELS[match.match_mode as MatchMode]}
+          </span>
+        )}
+        {match.entry_mode === "quick" && (
+          <span className="flex items-center gap-0.5 text-muted-foreground/50">
+            <Keyboard className="h-3 w-3" />
+          </span>
+        )}
       </div>
 
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1.5">
-        {/* Home Team – content pushed toward score (right side) */}
-        <div className="flex items-center justify-end gap-2 min-w-0">
+        {/* Home Team – logo left (outer), name+GES right (toward score) */}
+        <div className="flex items-center gap-2 min-w-0">
           {homeTeam?.logoUrl && (
             <img src={homeTeam.logoUrl} alt="" className="h-10 w-10 flex-shrink-0 object-contain" />
           )}
-          <div className="flex flex-col items-end min-w-0">
+          <div className="flex flex-col items-end min-w-0 flex-1">
             <span className={`text-sm font-bold truncate max-w-full leading-tight ${winner === "home" ? "text-primary" : "text-foreground/70"}`}>
               {match.home_team_name}
             </span>
@@ -72,9 +70,9 @@ export default function MatchCard({ match, compact }: MatchCardProps) {
           </span>
         </div>
 
-        {/* Away Team – content pushed toward score (left side) */}
-        <div className="flex items-center justify-start gap-2 min-w-0">
-          <div className="flex flex-col items-start min-w-0">
+        {/* Away Team – name+GES left (toward score), logo right (outer) */}
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="flex flex-col items-start min-w-0 flex-1">
             <span className={`text-sm font-bold truncate max-w-full leading-tight ${winner === "away" ? "text-accent" : "text-foreground/70"}`}>
               {match.away_team_name}
             </span>
